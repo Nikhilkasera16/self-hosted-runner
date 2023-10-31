@@ -1,10 +1,13 @@
 name: My Github Actions
 
-on: [push]
+on:
+ push:
+   branches:
+   - main
 
 jobs:
  build:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
 
    strategy:
        matrix:
@@ -15,7 +18,7 @@ jobs:
    - uses: actions/checkout@v1
 
    - name: set up python
-     uses: actions/setup-python@v2
+   - uses: actions/setup-python@v2
      with:
        python-version: ${{ matrix.python-version }}
 
