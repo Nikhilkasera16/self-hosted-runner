@@ -1,7 +1,6 @@
 name: My Github Actions
 
-on:
- push:
+on: [push]
 
 jobs:
  build:
