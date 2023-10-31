@@ -1,9 +1,32 @@
 name: Android Build
 
 on:
- pull_request
- branches:
- - main
+ pull_request:
+  branches:
+  - main
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+
+    strategy:
+        matrix:
+           java-version: [11,12]
+    steps:
+    - name: Check Code
+      uses: actions/checkout@v1
+
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java-version }}
+
+    - name: Run Tests
+      run: |
+        ./gradlew test
+
+    - name: Build Project
+      run: |
+        ./gradlew assemble
+      
+    
